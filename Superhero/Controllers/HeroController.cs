@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Superhero.Data;
 using Superhero.Models;
 using System;
@@ -19,6 +20,7 @@ namespace Superhero.Controllers
         // GET: HeroController
         public ActionResult Index()
         {
+            var listHeroes = _context.Heroes.Where(h => h.name == h.name);
             return View();
         }
 
@@ -73,7 +75,7 @@ namespace Superhero.Controllers
         }
 
         // GET: HeroController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Hero hero)
         {
             return View();
         }
@@ -81,10 +83,11 @@ namespace Superhero.Controllers
         // POST: HeroController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Hero hero)
         {
             try
             {
+                _context.Heroes.Remove(hero);
                 return RedirectToAction(nameof(Index));
             }
             catch
