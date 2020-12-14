@@ -20,7 +20,7 @@ namespace Superhero.Controllers
         // GET: HeroController
         public ActionResult Index()
         {
-            var listHeroes = _context.Heroes.Where(h => h.name == h.name);
+            var listHeroes = new List<Hero>()
             return View();
         }
 
