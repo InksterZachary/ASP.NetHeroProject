@@ -17,17 +17,19 @@ namespace Superhero.Controllers
         {
             _context = context;
         }
+        
         // GET: HeroController
         public ActionResult Index()
         {
-            var listHeroes = new List<Hero>()
-            return View();
+            List<Hero> AllHeroes = _context.Heroes.ToList();
+            return View(AllHeroes);
         }
 
         // GET: HeroController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
+            Hero chosenHero = _context.Heroes.Where(i => i.Id == Id).FirstOrDefault();
+            return View(chosenHero);
         }
 
         // GET: HeroController/Create
@@ -56,16 +58,18 @@ namespace Superhero.Controllers
         // GET: HeroController/Edit/5
         public ActionResult Edit(int id)
         {
+            Hero heroToEdit = _context.Heroes.Where(h => h.Id == id).FirstOrDefault();
             return View();
         }
 
         // POST: HeroController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Hero updatedHero)
         {
             try
             {
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,9 +79,10 @@ namespace Superhero.Controllers
         }
 
         // GET: HeroController/Delete/5
-        public ActionResult Delete(Hero hero)
+        public ActionResult Delete(int Id)
         {
-            return View();
+            Hero deleteHero = _context.Heroes.Where(h => h.Id == Id).FirstOrDefault();
+            return View(deleteHero);
         }
 
         // POST: HeroController/Delete/5

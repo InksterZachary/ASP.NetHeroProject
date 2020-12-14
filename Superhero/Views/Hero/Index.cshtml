@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Superhero Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -15,23 +15,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.alterEgo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.mainPower)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lesserPower)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.catchPhrase)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in model) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
