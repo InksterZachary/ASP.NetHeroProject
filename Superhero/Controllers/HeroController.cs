@@ -56,10 +56,10 @@ namespace Superhero.Controllers
         }
 
         // GET: HeroController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            Hero heroToEdit = _context.Heroes.Where(h => h.Id == id).FirstOrDefault();
-            return View();
+            Hero heroToEdit = _context.Heroes.Where(h => h.Id == Id).FirstOrDefault();
+            return View(heroToEdit);
         }
 
         // POST: HeroController/Edit/5
@@ -69,7 +69,8 @@ namespace Superhero.Controllers
         {
             try
             {
-
+                _context.Heroes.Update(updatedHero);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -93,6 +94,7 @@ namespace Superhero.Controllers
             try
             {
                 _context.Heroes.Remove(hero);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
